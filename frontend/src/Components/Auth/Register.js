@@ -1,7 +1,6 @@
 import React, { useState } from "react";
 import {
   VStack,
-  Box,
   StackDivider,
   FormControl,
   FormLabel,
