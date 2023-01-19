@@ -8,17 +8,51 @@ import {
   InputGroup,
   InputRightElement,
   Button,
+  useToast,
 } from "@chakra-ui/react";
 
 function Register() {
+  const toast = useToast();
+  
   const [show, setShow] = useState(false);
   const [name, setName] = useState();
   const [email, setEmail] = useState();
   const [password, setPassword] = useState();
   const [confirmPassword, setConfirmPassword] = useState();
+  const [loading, setLoading] = useState(false);
 
-  const onRegisterHandler = () => {
-    console.log("click...");
+  const onRegisterHandler = async () => {
+    setLoading((state) => true);
+    if (!name || !email || !password || !confirmPassword) {
+      toast({
+        title: "Please provide all the details.",
+        description: "Please provide name, email, password & confirm password",
+        status: "error",
+        duration: 3000,
+        isClosable: true,
+        position: "top-right",
+      });
+      setLoading((state) => false);
+      return;
+    }
+    if (password !== confirmPassword) {
+      toast({
+        title: "Password & Confirm password is unmatched.",
+        description: "Please provide the right password & confirm password.",
+        status: "error",
+        duration: 3000,
+        isClosable: true,
+        position: "top-right",
+      });
+      setLoading((state) => false);
+      return;
+    }
+
+    try {
+      
+    } catch (error) {
+      
+    }
   };
 
   return (
@@ -91,6 +125,7 @@ function Register() {
         width={"100%"}
         marginTop={"15px"}
         onClick={onRegisterHandler}
+        isLoading={loading}
       >
         Register
       </Button>

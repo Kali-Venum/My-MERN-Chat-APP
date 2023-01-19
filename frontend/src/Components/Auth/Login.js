@@ -1,4 +1,5 @@
 import React, { useState } from "react";
+import axios from "axios";
 import {
   VStack,
   StackDivider,
@@ -8,15 +9,57 @@ import {
   InputGroup,
   InputRightElement,
   Button,
+  useToast,
 } from "@chakra-ui/react";
 
 function Login() {
+  const toast = useToast();
+
   const [show, setShow] = useState();
   const [email, setEmail] = useState();
   const [password, setPassword] = useState();
+  const [loading, setLoading] = useState(false);
 
-  const onLoginHandler = () => {
-    console.log("click...");
+  const onLoginHandler = async () => {
+    setLoading((state) => true);
+    if (!email || !password) {
+      toast({
+        title: "Please provide all the details.",
+        description: "Please provide your email & password.",
+        status: "error",
+        duration: 3000,
+        isClosable: true,
+        position: "top-right",
+      });
+      setLoading((state) => false);
+      return;
+    }
+    try {
+      const config = {
+        headers: {
+          "Content-type": "application/json",
+        },
+      };
+
+      const { data } = await axios.post(
+        "localhost:5000/api/users/login",
+        {
+          email,
+          password,
+        },
+        config
+      );
+      toast({
+        title: "Login Successful",
+        description: "You have successfully logged in to your account.",
+        status: "success",
+        duration: 3000,
+        isClosable: true,
+        position: "top-right",
+      });
+      localStorage.setItem("userInfo", JSON.stringify(data));
+      setLoading((state) => false);
+    } catch (error) {}
   };
 
   return (
@@ -59,6 +102,7 @@ function Login() {
         width={"100%"}
         marginTop={"15px"}
         onClick={onLoginHandler}
+        isLoading={loading}
       >
         Login
       </Button>
