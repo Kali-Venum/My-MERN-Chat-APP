@@ -17,7 +17,7 @@ function Login() {
 
   const onLoginHandler = () => {
     console.log("click...");
-  }
+  };
 
   return (
     <VStack
@@ -61,6 +61,17 @@ function Login() {
         onClick={onLoginHandler}
       >
         Login
+      </Button>
+      <Button
+        colorScheme={"blue"}
+        width={"100%"}
+        marginTop={"15px"}
+        onClick={() => {
+          setEmail("guest@example.com");
+          setPassword("12345678A");
+        }}
+      >
+        Get Guest User Credentials
       </Button>
     </VStack>
   );
