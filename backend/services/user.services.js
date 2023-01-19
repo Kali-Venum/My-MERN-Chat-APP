@@ -1,7 +1,24 @@
 const bcrypt = require("bcrypt");
 const UserModel = require("../models/user.model");
 
-// const userLogin = async (reqBody) => {};
+const userLogin = async (reqBody) => {
+  const { email, password } = reqBody;
+  if (!email || !password) {
+    throw new Error("Please enter all the details.");
+  } else {
+    const user = await UserModel.findOne({ email });
+    if (!user) {
+      throw new Error("Invalid user credentials.");
+    } else {
+      const checkedPassword = await bcrypt.compare(password, user.password);
+      if (checkedPassword) {
+        return user;
+      } else {
+        throw new Error("Invalid user credentials.");
+      }
+    }
+  }
+};
 
 const userRegistration = async (reqBody) => {
   const { name, email, password, confirmPassword } = reqBody;
@@ -14,7 +31,7 @@ const userRegistration = async (reqBody) => {
   }
 
   const existingEmail = await UserModel.findOne({ email });
-  console.log(existingEmail, "<<== existingEmail....")
+  console.log(existingEmail, "<<== existingEmail....");
   if (existingEmail) {
     throw new Error("Someone registered with this email previously.");
   } else {
@@ -34,6 +51,6 @@ const userRegistration = async (reqBody) => {
 };
 
 module.exports = {
-  //   userLogin,
+  userLogin,
   userRegistration,
 };
