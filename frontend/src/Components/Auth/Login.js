@@ -14,6 +14,11 @@ function Login() {
   const [show, setShow] = useState();
   const [email, setEmail] = useState();
   const [password, setPassword] = useState();
+
+  const onLoginHandler = () => {
+    console.log("click...");
+  }
+
   return (
     <VStack
       divider={<StackDivider borderColor="gray.200" />}
@@ -49,6 +54,14 @@ function Login() {
           </InputRightElement>
         </InputGroup>
       </FormControl>
+      <Button
+        colorScheme={"green"}
+        width={"100%"}
+        marginTop={"15px"}
+        onClick={onLoginHandler}
+      >
+        Login
+      </Button>
     </VStack>
   );
 }
