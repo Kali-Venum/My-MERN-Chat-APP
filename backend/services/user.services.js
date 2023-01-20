@@ -50,7 +50,36 @@ const userRegistration = async (reqBody) => {
   }
 };
 
+const allUsers = async (reqQuery, reqUser) => {
+  const keyword = reqQuery.search
+    ? {
+        $or: [
+          {
+            name: {
+              $regex: reqQuery.search,
+              $options: "i",
+            },
+          },
+          {
+            email: {
+              $regex: reqQuery.search,
+              $options: "i",
+            },
+          },
+        ],
+      }
+    : {};
+
+  const users = await UserModel.find(keyword).find({
+    _id: { $ne: reqUser._id },
+  });
+  if (users) {
+    return users;
+  }
+};
+
 module.exports = {
   userLogin,
   userRegistration,
+  allUsers,
 };

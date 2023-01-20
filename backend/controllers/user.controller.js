@@ -28,7 +28,20 @@ const userRegistration = asyncHandler(async (req, res) => {
   }
 });
 
+const allUsers = asyncHandler(async (req, res) => {
+  const user = await userServices.allUsers(req.query, req.user);
+  if (user) {
+    res.status(201).send({
+      statusCode: 200,
+      statusType: "SUCCESS",
+      error: false,
+      data: user,
+    });
+  }
+});
+
 module.exports = {
   userLogin,
   userRegistration,
+  allUsers
 };
