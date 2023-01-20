@@ -1,4 +1,5 @@
 import React, { useState } from "react";
+import axios from "axios";
 import {
   VStack,
   StackDivider,
@@ -13,7 +14,7 @@ import {
 
 function Register() {
   const toast = useToast();
-  
+
   const [show, setShow] = useState(false);
   const [name, setName] = useState();
   const [email, setEmail] = useState();
@@ -49,10 +50,36 @@ function Register() {
     }
 
     try {
-      
-    } catch (error) {
-      
-    }
+      setLoading((state) => true);
+      const config = {
+        headers: {
+          "Content-type": "application/json",
+        },
+      };
+
+      const { data } = await axios.post(
+        "http://localhost:5000/api/users/register",
+        {
+          name,
+          email,
+          password,
+          confirmPassword,
+        },
+        config
+      );
+
+      if (data) {
+        setLoading((state) => false);
+        toast({
+          title: "Registration successful.",
+          description: "You have been registered successfully.",
+          status: "success",
+          duration: 3000,
+          isClosable: true,
+          position: "top-right",
+        });
+      }
+    } catch (error) {}
   };
 
   return (
