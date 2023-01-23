@@ -58,8 +58,19 @@ function Login() {
         position: "top-right",
       });
       localStorage.setItem("userInfo", JSON.stringify(data));
+      
       setLoading((state) => false);
-    } catch (error) {}
+    } catch (error) {
+      toast({
+        title: "Login Faild",
+        description: error.message,
+        status: "error",
+        duration: 3000,
+        isClosable: true,
+        position: "top-right",
+      });
+      setLoading((state) => false);
+    }
   };
 
   return (

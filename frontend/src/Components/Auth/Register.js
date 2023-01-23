@@ -15,7 +15,8 @@ import {
 function Register() {
   const toast = useToast();
 
-  const [show, setShow] = useState(false);
+  const [showOne, setShowOne] = useState(false);
+  const [showTwo, setShowTwo] = useState(false);
   const [name, setName] = useState();
   const [email, setEmail] = useState();
   const [password, setPassword] = useState();
@@ -79,7 +80,17 @@ function Register() {
           position: "top-right",
         });
       }
-    } catch (error) {}
+    } catch (error) {
+      toast({
+        title: "Registration Faild",
+        description: error.message,
+        status: "error",
+        duration: 3000,
+        isClosable: true,
+        position: "top-right",
+      });
+      setLoading((state) => false);
+    }
   };
 
   return (
@@ -110,7 +121,7 @@ function Register() {
         <FormLabel>Password</FormLabel>
         <InputGroup>
           <Input
-            type={show ? "text" : "password"}
+            type={showOne ? "text" : "password"}
             placeholder="Enter your password"
             onChange={(e) => setPassword((state) => e.target.value)}
             value={password}
@@ -119,9 +130,9 @@ function Register() {
             <Button
               h={"40px"}
               size={"sm"}
-              onClick={(e) => setShow((state) => !state)}
+              onClick={(e) => setShowOne((state) => !state)}
             >
-              {show ? "Hide" : "Show"}
+              {showOne ? "Hide" : "Show"}
             </Button>
           </InputRightElement>
         </InputGroup>
@@ -130,7 +141,7 @@ function Register() {
         <FormLabel>Confirm Password</FormLabel>
         <InputGroup>
           <Input
-            type={show ? "text" : "password"}
+            type={showTwo ? "text" : "password"}
             placeholder="Enter your confirm password"
             onChange={(e) => setConfirmPassword((state) => e.target.value)}
             value={confirmPassword}
@@ -139,9 +150,9 @@ function Register() {
             <Button
               h={"40px"}
               size={"sm"}
-              onClick={(e) => setShow((state) => !state)}
+              onClick={(e) => setShowTwo((state) => !state)}
             >
-              {show ? "Hide" : "Show"}
+              {showTwo ? "Hide" : "Show"}
             </Button>
           </InputRightElement>
         </InputGroup>
