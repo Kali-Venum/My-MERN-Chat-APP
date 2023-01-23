@@ -11,6 +11,7 @@ import {
   Button,
   useToast,
 } from "@chakra-ui/react";
+import { BsFillEyeFill, BsFillEyeSlashFill } from "react-icons/bs";
 
 function Login() {
   const toast = useToast();
@@ -58,7 +59,7 @@ function Login() {
         position: "top-right",
       });
       localStorage.setItem("userInfo", JSON.stringify(data));
-      
+
       setLoading((state) => false);
     } catch (error) {
       toast({
@@ -103,7 +104,7 @@ function Login() {
               size={"sm"}
               onClick={(e) => setShow((state) => !state)}
             >
-              {show ? "Hide" : "Show"}
+              {show ? <BsFillEyeSlashFill/> : <BsFillEyeFill/>}
             </Button>
           </InputRightElement>
         </InputGroup>

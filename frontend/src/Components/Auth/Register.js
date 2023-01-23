@@ -11,6 +11,8 @@ import {
   Button,
   useToast,
 } from "@chakra-ui/react";
+import { BsFillEyeFill, BsFillEyeSlashFill } from "react-icons/bs";
+
 
 function Register() {
   const toast = useToast();
@@ -132,7 +134,7 @@ function Register() {
               size={"sm"}
               onClick={(e) => setShowOne((state) => !state)}
             >
-              {showOne ? "Hide" : "Show"}
+              {showOne ? <BsFillEyeSlashFill/> : <BsFillEyeFill/>}
             </Button>
           </InputRightElement>
         </InputGroup>
@@ -152,7 +154,7 @@ function Register() {
               size={"sm"}
               onClick={(e) => setShowTwo((state) => !state)}
             >
-              {showTwo ? "Hide" : "Show"}
+              {showTwo ? <BsFillEyeSlashFill/> : <BsFillEyeFill/>}
             </Button>
           </InputRightElement>
         </InputGroup>
