@@ -1,5 +1,6 @@
 import React, { useState } from "react";
 import axios from "axios";
+import { useNavigate } from "react-router-dom";
 import {
   VStack,
   StackDivider,
@@ -13,8 +14,8 @@ import {
 } from "@chakra-ui/react";
 import { BsFillEyeFill, BsFillEyeSlashFill } from "react-icons/bs";
 
-
 function Register() {
+  const navigate = useNavigate();
   const toast = useToast();
 
   const [showOne, setShowOne] = useState(false);
@@ -72,7 +73,6 @@ function Register() {
       );
 
       if (data) {
-        setLoading((state) => false);
         toast({
           title: "Registration successful.",
           description: "You have been registered successfully.",
@@ -81,6 +81,8 @@ function Register() {
           isClosable: true,
           position: "top-right",
         });
+        setLoading((state) => false);
+        navigate("/chats");
       }
     } catch (error) {
       toast({
@@ -134,7 +136,7 @@ function Register() {
               size={"sm"}
               onClick={(e) => setShowOne((state) => !state)}
             >
-              {showOne ? <BsFillEyeSlashFill/> : <BsFillEyeFill/>}
+              {showOne ? <BsFillEyeSlashFill /> : <BsFillEyeFill />}
             </Button>
           </InputRightElement>
         </InputGroup>
@@ -154,7 +156,7 @@ function Register() {
               size={"sm"}
               onClick={(e) => setShowTwo((state) => !state)}
             >
-              {showTwo ? <BsFillEyeSlashFill/> : <BsFillEyeFill/>}
+              {showTwo ? <BsFillEyeSlashFill /> : <BsFillEyeFill />}
             </Button>
           </InputRightElement>
         </InputGroup>

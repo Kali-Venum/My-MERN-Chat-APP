@@ -1,5 +1,6 @@
 import React, { useState } from "react";
 import axios from "axios";
+import { useNavigate } from "react-router-dom";
 import {
   VStack,
   StackDivider,
@@ -14,6 +15,7 @@ import {
 import { BsFillEyeFill, BsFillEyeSlashFill } from "react-icons/bs";
 
 function Login() {
+  const navigate = useNavigate();
   const toast = useToast();
 
   const [show, setShow] = useState();
@@ -50,17 +52,19 @@ function Login() {
         },
         config
       );
-      toast({
-        title: "Login Successful",
-        description: "You have successfully logged in to your account.",
-        status: "success",
-        duration: 3000,
-        isClosable: true,
-        position: "top-right",
-      });
-      localStorage.setItem("userInfo", JSON.stringify(data));
-
-      setLoading((state) => false);
+      if (data) {
+        toast({
+          title: "Login Successful",
+          description: "You have successfully logged in to your account.",
+          status: "success",
+          duration: 3000,
+          isClosable: true,
+          position: "top-right",
+        });
+        localStorage.setItem("userInfo", JSON.stringify(data));
+        setLoading((state) => false);
+        navigate("/chats");
+      }
     } catch (error) {
       toast({
         title: "Login Faild",
@@ -104,7 +108,7 @@ function Login() {
               size={"sm"}
               onClick={(e) => setShow((state) => !state)}
             >
-              {show ? <BsFillEyeSlashFill/> : <BsFillEyeFill/>}
+              {show ? <BsFillEyeSlashFill /> : <BsFillEyeFill />}
             </Button>
           </InputRightElement>
         </InputGroup>
