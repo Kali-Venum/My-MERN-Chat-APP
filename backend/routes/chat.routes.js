@@ -8,19 +8,21 @@ const { protect } = require("../middlewares/auth.middleware");
 // Access chats of a user.
 router.post("/", protect, chatController.accessChat);
 
-// // Fetch all chats of that uiser.
-// router.get("/", protect, userController.fetchChats);
+// Fetch all chats of that user.
+router.get("/", protect, chatController.fetchChats);
 
-// // Fetch all chats of that uiser.
-// router.get("/group", protect, userController.createGroupChat);
+// Create a new group chat.
+router.post("/group", protect, chatController.createGroupChat);
 
-// // Fetch all chats of that uiser.
-// router.get("/rename", protect, userController.renameGroup);
+// Rename a chat group name.
+router.put("/rename", protect, chatController.renameGroup);
 
-// // Fetch all chats of that uiser.
-// router.put("/groupremove", protect, userController.removeFromGroup);
+// Add a user to a group.
+router.put("/groupadd", protect, chatController.addToGroup);
 
-// // Fetch all chats of that uiser.
-// router.put("/groupadd", protect, userController.addToGroup);
+// Remove a user from a group.
+router.delete("/groupremove", protect, chatController.removeFromGroup);
+
+
 
 module.exports = router;
