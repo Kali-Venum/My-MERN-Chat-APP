@@ -1,0 +1,24 @@
+<Modal isOpen={isOpen} onClose={onClose}>
+          <ModalOverlay />
+          <ModalContent>
+            <ModalHeader
+              fontSize={"40px"}
+              display={"flex"}
+              justifyContent={"center"}
+            >
+              {props.userStateData.name}
+            </ModalHeader>
+            <ModalCloseButton />
+            <ModalBody>
+              <Text fontSize={{ base: "28px", md: "30px" }}>
+                Email:- {props.userStateData.email}
+              </Text>
+            </ModalBody>
+
+            <ModalFooter>
+              <Button colorScheme="blue" mr={3} onClick={onClose}>
+                Close
+              </Button>
+            </ModalFooter>
+          </ModalContent>
+        </Modal>
