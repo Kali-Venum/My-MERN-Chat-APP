@@ -11,9 +11,15 @@ export const userSlice = createSlice({
     getUserInfo: (state, action) => {
       state.value = action.payload;
     },
+    selectedChat: (state, action) => {
+      state.value = action.payload;
+    },
+    userChats: (state, action) => {
+      state.value = action.payload
+    }
   },
 });
 
-export const { getUserInfo } = userSlice.actions;
+export const { getUserInfo, selectedChat } = userSlice.actions;
 
 export default userSlice.reducer;
