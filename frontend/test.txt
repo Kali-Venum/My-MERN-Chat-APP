@@ -22,3 +22,15 @@
             </ModalFooter>
           </ModalContent>
         </Modal>
+
+
+
+{props.userStateData ? (
+        <h1>{props.userStateData.name}</h1>
+      ) : (
+        <IconButton
+          d={{ base: "flex" }}
+          icon={<AtSignIcon />}
+          onClick={onOpen}
+        />
+      )}

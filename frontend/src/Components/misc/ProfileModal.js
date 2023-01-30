@@ -17,12 +17,10 @@ import { AtSignIcon } from "@chakra-ui/icons";
 function ProfileModal(props) {
   const { isOpen, onOpen, onClose } = useDisclosure();
 
-  console.log(props.userStateData, "<<<=== props.userStateData...");
-
   return (
     <>
-      {props.userStateData ? (
-        <h1>{props.userStateData.name}</h1>
+      {props.children ? (
+        <span onClick={onOpen}> {props.children} </span>
       ) : (
         <IconButton
           d={{ base: "flex" }}
@@ -30,6 +28,20 @@ function ProfileModal(props) {
           onClick={onOpen}
         />
       )}
+
+      <Modal size={"lg"} isOpen={isOpen} onClose={onClose} isCentered>
+        <ModalOverlay />
+        <ModalContent>
+          <ModalHeader>{props.userStateData.name}</ModalHeader>
+          <ModalCloseButton />
+          <ModalBody>Email:- {props.userStateData.email}</ModalBody>
+          <ModalFooter>
+            <Button colorScheme="red" mr={3} onClick={onClose}>
+              Close
+            </Button>
+          </ModalFooter>
+        </ModalContent>
+      </Modal>
     </>
   );
 }

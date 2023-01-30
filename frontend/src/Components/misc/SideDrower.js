@@ -13,16 +13,21 @@ import {
 import { ChevronDownIcon } from "@chakra-ui/icons";
 import React, { useState } from "react";
 import { BsSearch } from "react-icons/bs";
+import { useNavigate } from "react-router-dom";
 
 import ProfileModal from "./ProfileModal";
 
 function SideDrower(props) {
+  const navigate = useNavigate();
   const [search, useSearch] = useState("");
   const [searchResult, useSearchResult] = useState([]);
   const [loading, setLoading] = useState(false);
   const [loadingChat, setLoadingChat] = useState();
 
-  console.log(props.userStateData, "<<== props.userStateData...")
+  const logoutHandler = () => {
+    localStorage.removeItem("userInfo");
+    navigate("/");
+  };
 
   return (
     <>
@@ -57,8 +62,8 @@ function SideDrower(props) {
               <ProfileModal userStateData={props.userStateData}>
                 <MenuItem>My Profile</MenuItem>
               </ProfileModal>
-              {/* <MenuDivider /> */}
-              {/* <MenuItem>Logout</MenuItem> */}
+              <MenuDivider />
+              <MenuItem onClick={() => logoutHandler()}>Logout</MenuItem>
             </MenuList>
           </Menu>
         </div>
