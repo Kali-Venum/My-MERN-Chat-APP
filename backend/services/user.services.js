@@ -31,7 +31,6 @@ const userRegistration = async (reqBody) => {
   }
 
   const existingEmail = await UserModel.findOne({ email });
-  console.log(existingEmail, "<<== existingEmail....");
   if (existingEmail) {
     throw new Error("Someone registered with this email previously.");
   } else {
