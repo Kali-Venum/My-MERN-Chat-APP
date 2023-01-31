@@ -1,8 +1,8 @@
 import React, { useState } from "react";
 import axios from "axios";
 import { useNavigate } from "react-router-dom";
-import { useDispatch } from 'react-redux';
-import { getUserInfo } from '../../redux/features/userSlice';
+import { useDispatch } from "react-redux";
+import { getUserInfo } from "../../redux/features/userSlice";
 import {
   VStack,
   StackDivider,
@@ -19,7 +19,7 @@ import { BsFillEyeFill, BsFillEyeSlashFill } from "react-icons/bs";
 function Login() {
   const navigate = useNavigate();
   const toast = useToast();
-  const dispatch = useDispatch()
+  const dispatch = useDispatch();
 
   const [show, setShow] = useState();
   const [email, setEmail] = useState();
@@ -66,7 +66,7 @@ function Login() {
         });
         localStorage.setItem("userInfo", JSON.stringify(data));
         setLoading((state) => false);
-        dispatch(getUserInfo(data))
+        dispatch(getUserInfo(data));
         navigate("/chats");
       }
     } catch (error) {
@@ -131,7 +131,7 @@ function Login() {
         width={"100%"}
         marginTop={"15px"}
         onClick={() => {
-          setEmail("guest@example.com");
+          setEmail("guest@guest.com");
           setPassword("12345678A");
         }}
       >

@@ -12,7 +12,7 @@ const UserListItem = (props) => {
       }}
       w="100%"
       display="flex"
-      alighnItems="center"
+      alighnitems="center"
       color="black"
       px={3}
       py={2}
