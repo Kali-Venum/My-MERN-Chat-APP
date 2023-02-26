@@ -82,7 +82,7 @@ const createGroupChat = async (reqBody, reqUser) => {
       let allUsers = [...reqBody.users, reqUser._id];
 
       const groupChat = await ChatModel.create({
-        chatName: reqBody.chatName,
+        chatName: reqBody.groupName,
         users: allUsers,
         isGroupChat: true,
         groupAdmin: reqUser._id,
