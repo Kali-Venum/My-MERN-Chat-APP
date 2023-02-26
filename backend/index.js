@@ -52,7 +52,6 @@ io.on("connection", (socket) => {
       if (user._id === newMessageRecived.sender._id) return;
 
       socket.in(user._id).emit("message-recieved", newMessageRecived);
-      s;
     });
   });
 });
